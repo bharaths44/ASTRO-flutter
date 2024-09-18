@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+part of 'file_upload_bloc.dart';
 
 abstract class FileUploadEvent extends Equatable {
   const FileUploadEvent();

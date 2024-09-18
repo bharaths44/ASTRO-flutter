@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+part of 'file_upload_bloc.dart';
 
-abstract class FileUploadState extends Equatable {
+sealed class FileUploadState extends Equatable {
   const FileUploadState();
 
   @override

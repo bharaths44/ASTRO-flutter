@@ -1,6 +1,4 @@
 import 'package:astro/bloc/file_upload_bloc.dart';
-import 'package:astro/bloc/file_upload_event.dart';
-import 'package:astro/bloc/file_upload_state.dart';
 import 'package:astro/chart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:astro/bloc/file_upload_event.dart';
-import 'package:astro/bloc/file_upload_state.dart';
+
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
+part 'file_upload_event.dart';
+part 'file_upload_state.dart';
 
 class FileUploadBloc extends Bloc<FileUploadEvent, FileUploadState> {
   var logger = Logger();
@@ -14,7 +16,6 @@ class FileUploadBloc extends Bloc<FileUploadEvent, FileUploadState> {
   FileUploadBloc() : super(FileUploadInitial()) {
     on<PickFileEvent>(_onPickFileEvent);
     on<UploadFileEvent>(_onUploadFileEvent);
-    on<ResetFileUploadEvent>(_onResetFileUploadEvent);
   }
 
   Future<void> _onPickFileEvent(
@@ -78,10 +79,5 @@ class FileUploadBloc extends Bloc<FileUploadEvent, FileUploadState> {
           .e('Failed to upload file with status code: ${response.statusCode}');
       emit(const FileUploadFailure('Failed to upload file'));
     }
-  }
-
-  void _onResetFileUploadEvent(
-      ResetFileUploadEvent event, Emitter<FileUploadState> emit) {
-    emit(FileUploadInitial());
   }
 }
