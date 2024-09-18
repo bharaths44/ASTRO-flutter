@@ -18,3 +18,5 @@ class UploadFileEvent extends FileUploadEvent {
   @override
   List<Object> get props => [filePath, params];
 }
+
+class ResetFileUploadEvent extends FileUploadEvent {}
