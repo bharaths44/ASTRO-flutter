@@ -9,7 +9,6 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
-  bloc: ^8.1.4
   csv: ^6.0.0
   cupertino_icons: ^1.0.8
   dio: ^5.7.0
@@ -43,3 +42,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+flutter_launcher_icons:
+  ios: true
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  image_path: "/Users/bharaths/Developer/ASTRO/astro-flutter/assets/Astro Logo copy.jpeg"
+  web:
+    generate: true
+    image_path: "/Users/bharaths/Developer/ASTRO/astro-flutter/assets/Astro Logo copy.jpeg"
+    background_color: "#FFFFFF"
+    theme_color: "#002770"

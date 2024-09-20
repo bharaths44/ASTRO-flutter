@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:io';
-
+import 'package:astro/core/utils/http_upload.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
-import 'package:path_provider/path_provider.dart';
 part 'file_upload_event.dart';
 part 'file_upload_state.dart';
 
@@ -30,7 +27,7 @@ class FileUploadBloc extends Bloc<FileUploadEvent, FileUploadState> {
           'store_num': 1,
           'item_num': 1,
           'period_type': 'M',
-          'num_periods': 6,
+          'num_periods': 24,
         };
         add(UploadFileEvent(filePath, params));
       } else {
@@ -45,39 +42,12 @@ class FileUploadBloc extends Bloc<FileUploadEvent, FileUploadState> {
   Future<void> _onUploadFileEvent(
       UploadFileEvent event, Emitter<FileUploadState> emit) async {
     emit(FileUploadLoading());
-    var request = http.MultipartRequest(
-      'POST',
-      Uri.parse('http://localhost:8000/predict'),
-    );
-
-    request.files
-        .add(await http.MultipartFile.fromPath('file', event.filePath));
-    event.params.forEach((key, value) {
-      request.fields[key] = value.toString();
-    });
-
-    // Log the fields to verify they are being added correctly
-    logger.i('Request fields: ${request.fields}');
-
-    var response = await request.send();
-    if (response.statusCode == 200) {
-      var responseBody = await response.stream.toBytes();
-      logger.i('Response received');
-
-      try {
-        final directory = await getApplicationDocumentsDirectory();
-        final filePath = '${directory.path}/response.svg';
-        final file = File(filePath);
-        await file.writeAsBytes(responseBody);
-        emit(FileUploadSvgSuccess(filePath));
-      } catch (e) {
-        logger.e('Error saving SVG file: $e');
-        emit(FileUploadFailure('Error saving SVG file: $e'));
-      }
-    } else {
-      logger
-          .e('Failed to upload file with status code: ${response.statusCode}');
-      emit(const FileUploadFailure('Failed to upload file'));
+    try {
+      final filePath = await uploadFile(event.filePath, event.params);
+      emit(FileUploadSvgSuccess(filePath));
+    } catch (e) {
+      logger.e('Error uploading file: $e');
+      emit(FileUploadFailure(e.toString()));
     }
   }
 }
