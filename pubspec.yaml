@@ -11,7 +11,6 @@ environment:
 dependencies:
   csv: ^6.0.0
   cupertino_icons: ^1.0.8
-  dio: ^5.7.0
   equatable: ^2.0.5
   file_picker: ^8.1.2
   firebase_auth: ^5.2.1
@@ -22,11 +21,11 @@ dependencies:
   flutter_animate: ^4.5.0
   flutter_bloc: ^8.1.6
   flutter_svg: ^2.0.10+1
+  google_fonts: ^6.2.1
   graphic: ^2.5.0
   http: ^1.2.2
   http_parser: ^4.0.2
   intl: ^0.19.0
-  moving_average: ^0.3.1
   path_provider: ^2.1.4
   responsive_framework: ^1.5.1
   shared_preferences: ^2.3.2

@@ -12,7 +12,6 @@ class FileUploadBloc extends Bloc<FileUploadEvent, FileUploadState> {
 
   FileUploadBloc() : super(FileUploadInitial()) {
     on<PickFileEvent>(_onPickFileEvent);
-    on<UploadFileEvent>(_onUploadFileEvent);
     on<FetchDataEvent>(_onFetchDataEvent);
   }
 
@@ -27,31 +26,14 @@ class FileUploadBloc extends Bloc<FileUploadEvent, FileUploadState> {
         Map<String, dynamic> params = {
           'store_num': 1,
           'item_num': 1,
-          'period_type': 'M',
-          'num_periods': 24,
         };
-        if (event.isUpload) {
-          add(UploadFileEvent(filePath, params));
-        } else {
-          add(FetchDataEvent(filePath, params));
-        }
+
+        add(FetchDataEvent(filePath, params));
       } else {
         logger.i('File picking cancelled');
       }
     } catch (e) {
       logger.e('Error picking file: $e');
-      emit(FileUploadFailure(e.toString()));
-    }
-  }
-
-  Future<void> _onUploadFileEvent(
-      UploadFileEvent event, Emitter<FileUploadState> emit) async {
-    emit(FileUploadLoading());
-    try {
-      final filePath = await uploadFile(event.filePath, event.params);
-      emit(FileUploadSvgSuccess(filePath));
-    } catch (e) {
-      logger.e('Error uploading file: $e');
       emit(FileUploadFailure(e.toString()));
     }
   }

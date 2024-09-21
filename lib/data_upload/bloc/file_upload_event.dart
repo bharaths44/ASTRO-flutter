@@ -16,16 +16,6 @@ class PickFileEvent extends FileUploadEvent {
   List<Object> get props => [isUpload];
 }
 
-class UploadFileEvent extends FileUploadEvent {
-  final String filePath;
-  final Map<String, dynamic> params;
-
-  const UploadFileEvent(this.filePath, this.params);
-
-  @override
-  List<Object> get props => [filePath, params];
-}
-
 class FetchDataEvent extends FileUploadEvent {
   final String filePath;
   final Map<String, dynamic> params;

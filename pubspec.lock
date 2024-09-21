@@ -121,22 +121,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      sha256: "5598aa796bbf4699afd5c67c0f5f6e2ed542afc956884b9cd58c306966efc260"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.7.0"
-  dio_web_adapter:
-    dependency: transitive
-    description:
-      name: dio_web_adapter
-      sha256: "33259a9276d6cea88774a0000cfae0d861003497755969c92faa223108620dc8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   equatable:
     dependency: "direct main"
     description:
@@ -320,6 +304,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_fonts:
+    dependency: "direct main"
+    description:
+      name: google_fonts
+      sha256: b1ac0fe2832c9cc95e5e88b57d627c5e68c223b9657f4b96e1487aa9098c7b82
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.1"
   graphic:
     dependency: "direct main"
     description:
@@ -432,14 +424,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
-  moving_average:
-    dependency: "direct main"
-    description:
-      name: moving_average
-      sha256: b064913cd11f64b13af6a298361b1e68e82933ab32c5ee7e631474b88870fc56
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.1"
   nested:
     dependency: transitive
     description:

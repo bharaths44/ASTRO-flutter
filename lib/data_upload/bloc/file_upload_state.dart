@@ -11,15 +11,6 @@ class FileUploadInitial extends FileUploadState {}
 
 class FileUploadLoading extends FileUploadState {}
 
-class FileUploadSvgSuccess extends FileUploadState {
-  final String svgFilePath;
-
-  const FileUploadSvgSuccess(this.svgFilePath);
-
-  @override
-  List<Object> get props => [svgFilePath];
-}
-
 class FileUploadFailure extends FileUploadState {
   final String error;
 
