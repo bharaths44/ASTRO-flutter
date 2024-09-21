@@ -7,7 +7,14 @@ abstract class FileUploadEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class PickFileEvent extends FileUploadEvent {}
+class PickFileEvent extends FileUploadEvent {
+  final bool isUpload;
+
+  const PickFileEvent(this.isUpload);
+
+  @override
+  List<Object> get props => [isUpload];
+}
 
 class UploadFileEvent extends FileUploadEvent {
   final String filePath;
@@ -19,4 +26,12 @@ class UploadFileEvent extends FileUploadEvent {
   List<Object> get props => [filePath, params];
 }
 
-class ResetFileUploadEvent extends FileUploadEvent {}
+class FetchDataEvent extends FileUploadEvent {
+  final String filePath;
+  final Map<String, dynamic> params;
+
+  const FetchDataEvent(this.filePath, this.params);
+
+  @override
+  List<Object> get props => [filePath, params];
+}

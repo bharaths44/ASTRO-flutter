@@ -1,6 +1,6 @@
 part of 'file_upload_bloc.dart';
 
-sealed class FileUploadState extends Equatable {
+abstract class FileUploadState extends Equatable {
   const FileUploadState();
 
   @override
@@ -10,16 +10,6 @@ sealed class FileUploadState extends Equatable {
 class FileUploadInitial extends FileUploadState {}
 
 class FileUploadLoading extends FileUploadState {}
-
-class FileUploadSuccess extends FileUploadState {
-  final List<Map<String, dynamic>> predictions;
-  final List<Map<String, dynamic>> actualSales;
-
-  const FileUploadSuccess(this.predictions, this.actualSales);
-
-  @override
-  List<Object> get props => [predictions, actualSales];
-}
 
 class FileUploadSvgSuccess extends FileUploadState {
   final String svgFilePath;
@@ -37,4 +27,13 @@ class FileUploadFailure extends FileUploadState {
 
   @override
   List<Object> get props => [error];
+}
+
+class FetchDataSuccess extends FileUploadState {
+  final String data;
+
+  const FetchDataSuccess(this.data);
+
+  @override
+  List<Object> get props => [data];
 }

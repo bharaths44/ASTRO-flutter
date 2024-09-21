@@ -1,22 +1,37 @@
+import 'package:astro/data_upload/model/sales_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:io';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
-class SvgViewerWidget extends StatelessWidget {
-  final String svgFilePath;
 
-  const SvgViewerWidget({super.key, required this.svgFilePath});
+class SalesChart extends StatelessWidget {
+  final SalesData salesData;
+
+  const SalesChart({super.key, required this.salesData});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: SvgPicture.file(
-      File(svgFilePath),
-      placeholderBuilder: (BuildContext context) =>
-          const CircularProgressIndicator(),
-      fit: BoxFit.contain,
-      width: double.infinity,
-      height: double.infinity,
-    ));
+    return SizedBox(
+      height: 300,
+      child: SfCartesianChart(
+        primaryXAxis: const DateTimeAxis(),
+        series: <CartesianSeries>[
+          LineSeries<ActualSales, DateTime>(
+            dataSource: salesData.actualSales!,
+            xValueMapper: (ActualSales sales, _) => DateTime.parse(sales.ds!),
+            yValueMapper: (ActualSales sales, _) => sales.salesTrend,
+            color: Colors.blue,
+            name: 'Actual Sales',
+          ),
+          LineSeries<Forecast, DateTime>(
+            dataSource: salesData.forecast!,
+            xValueMapper: (Forecast forecast, _) =>
+                DateTime.parse(forecast.ds!),
+            yValueMapper: (Forecast forecast, _) => forecast.yhatTrend,
+            color: Colors.orange,
+            name: 'Forecast',
+          ),
+        ],
+      ),
+    );
   }
 }
